@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will you be my Valentine?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset and Body Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* The soft pink/peach gradient background */
+            background: linear-gradient(135deg, #ffe6e6, #ffdbdb, #ffecd2);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden; 
+        }
+
+        /* The Main Card Container */
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: relative; 
+            min-height: 450px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Images Styling */
+        .img-container img {
+            width: 180px;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* The Question Text */
+        h1 {
+            font-family: 'Dancing Script', cursive; 
+            color: #ff5e6c;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        /* Button Container */
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 12px 30px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        /* Yes Button */
+        #yes-btn {
+            background-color: #ff4b6e; 
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 75, 110, 0.4);
+        }
+        
+        #yes-btn:hover {
+            transform: scale(1.05);
+            background-color: #ff335c;
+        }
+
+        /* No Button */
+        #no-btn {
+            background-color: #e2e2e2; 
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Starts relative, becomes absolute when moved */
+        }
+
+        /* Success Message Styling (Hidden initially) */
+        #success-section {
+            display: none; 
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .heart {
+            color: #ff4b6e;
+            font-size: 1.5rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div id="question-section">
+            <div class="img-container">
+                <img src="img-1.jpg" alt="Cute Cats">
+            </div>
+            <h1>Will you be my Valentine Ladduuuu?❤️</h1>
+            <div class="btn-group">
+                <button id="yes-btn">Yes!</button>
+                <button id="no-btn">No</button>
+            </div>
+        </div>
+
+        <div id="success-section">
+            <div class="img-container">
+                <img src="img-2.jpeg" alt="Happy Penguin">
+            </div>
+            <h1>I Lovee Youuu Bujjammaaaa❤️🫂<span class="heart"></span></h1>
+        </div>
+    </div>
+
+    <script>
+        const questionSection = document.getElementById('question-section');
+        const successSection = document.getElementById('success-section');
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const card = document.querySelector('.card');
+
+        // FUNCTION 1: Move the "No" Button randomly
+        function moveNoButton() {
+            const cardRect = card.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+
+            // Calculate available space
+            const maxX = cardRect.width - btnRect.width - 40; 
+            const maxY = cardRect.height - btnRect.height - 40;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            // Set to absolute position to move it freely
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // Run move function on Hover (Desktop) and Touch (Mobile)
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => {
+             e.preventDefault(); 
+             moveNoButton();
+        });
+
+        // FUNCTION 2: Show "Yay" page on "Yes" Click
+        yesBtn.addEventListener('click', () => {
+            questionSection.style.display = 'none';
+            successSection.style.display = 'flex';
+        });
+    </script>
+
+</body>
+</html>
